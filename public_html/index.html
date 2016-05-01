@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Orientation</title>
+    </head>
+
+    <body>
+        <div>
+            <ul id="Felsorol">
+
+            </ul>
+
+        </div>
+
+
+        <script type="text/javascript">
+            function kiir(data) {
+                var li = document.createElement("li");
+                li.innerHTML = data;
+                document.getElementById("Felsorol").appendChild(li);
+            }
+
+            var battery = navigator.battery;
+            console.log("Töltöttségi szint:" + battery.level * 100 + "%");
+            battery.addEventListener("levelchange", function () {
+                console.log("Töltöttségi szint:" + battery.level * 100 + "%");
+            });
+
+            battery.addEventListener("chargingchange", function () {
+                if (battery.charging) {
+                    kiir("Tötlő csatlakoztatva :-)");
+                } else {
+                    kiir("Tötlő leválasztva :-(");
+                }
+            });
+
+            battery.addEventListener("chargingtimechange", function () {
+                console.log("A feltöltésig hátralévő idő: " + battery.chargingTime + " mp");
+                kiir("A feltöltésig hátralévő idő: " + battery.chargingTime + " mp");
+            });
+
+            battery.addEventListener("dischargingtimechange", function () {
+                console.log("A lemerülésig hátralévő idő: " + battery.dischargingTime + " mp");
+                kiir("A lemerülésig hátralévő idő: " + battery.dischargingTime + " mp");
+            });
+        </script>
+    </body>
+
+</html>
